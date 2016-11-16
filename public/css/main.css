@@ -1,0 +1,11 @@
+#app-title {
+  background-color: purple;
+  color: white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+#juke {
+  width: 30%;
+  height: 30%;
+}

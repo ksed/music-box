@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="music-box">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Music Box</title>
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <header>
+      <div class="container-fluid">
+        <div class="row">
+          <div id="app-title" class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-10"><h1>My Music Box</h1></div>
+            <div class="col-md-2"><img src="images/jukebox.png" alt="A jukebox" id="juke" /></div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main ng-controller="MainController">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- nav-tab menus help: http://www.w3schools.com/bootstrap/bootstrap_tabs_pills.asp -->
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <h5>Choose an Album by:&nbsp;</h5>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Title
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li ng-repeat='album in albums track by $index'>
+                  <span ng-click='selectAlbum(album, $index)'>{{ album.title }}</span>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Artist
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li ng-repeat='album in albums track by $index'>
+                  <span ng-click='selectAlbum(album, $index)'>{{ album.artist }}</span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-6" ng-show="selectedAlbum">
+            <div>
+              <span class="col-md-2">Title:</span>
+              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.title'>
+              <span ng-hide='selectedAlbum.isBeingEdited' ng-click='editAlbum(selectedAlbum)'>{{ selectedAlbum.title }}</span>
+              <button ng-click='saveAlbum(selectedAlbumIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
+              <button ng-click='deleteAlbum(selectedAlbumIndex)'>&times;</button>
+            </div>
+            <div>
+              <span class="col-md-2">Artist:</span>
+              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.artist'>
+              <span ng-hide='selectedAlbum.isBeingEdited' ng-click='editAlbum(selectedAlbum)'>{{ selectedAlbum.artist }}</span>
+              <button ng-click='saveAlbum(selectedAlbumIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
+            </div>
+            <div>
+              <span class="col-md-2">Released:</span>
+              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.releaseDate'>
+              <span ng-hide='selectedAlbum.isBeingEdited' ng-click='editAlbum(selectedAlbum)'>{{ selectedAlbum.releaseDate | date:"longDate" }}</span>
+              <button ng-click='saveAlbum(selectedAlbumIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
+            </div>
+            <div>
+              <span class="col-md-2">Liked:</span>
+              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.isGood'>
+              <span ng-hide='selectedAlbum.isBeingEdited' ng-click='editAlbum(selectedAlbum)'>{{ selectedAlbum.isGood }}</span>
+              <button ng-click='saveTodo(selectedAlbumIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/main.controller.js"></script>
+    <script src="js/services/album.service.js"></script>
+  </body>
+</html>
