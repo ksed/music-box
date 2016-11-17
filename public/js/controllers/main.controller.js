@@ -12,9 +12,11 @@
     $scope.editAlbum = editAlbum;
     $scope.saveAlbum = saveAlbum;
     $scope.newAlbum = newAlbum;
-    $scope.selectedAlbum = '';
-    $scope.selectedAlbumIndex = 0;
+    $scope.selectedAlbum = [];
+    $scope.selectedIndex = 0;
+    $scope.albumSelected = false;
     $scope.enteringAlbum = false;
+    $scope.blankAlbum = {};
 
     $scope.$watch(function(){
       return AlbumService.get();
@@ -22,24 +24,27 @@
     $scope.albums = AlbumService.get();
     });
     function selectAlbum(album, index) {
-      setAll();
-      album.isSelected = true;
-      $scope.enteringAlbum = false;
+      if($scope.enteringAlbum) {$scope.enteringAlbum = false;}
+      $scope.albumSelected = true;
       $scope.selectedAlbum = album;
-      $scope.selectedAlbumIndex = index;
+      $scope.selectedIndex = index;
     }
     function newAlbum() {
-      setAll();
-      $scope.selectedAlbum = '';
+      if($scope.albumSelected) {$scope.albumSelected = false;}
       $scope.enteringAlbum = true;
+      $scope.blankAlbum = {};
     }
     function createAlbum(newAlbum) {
       AlbumService.create(newAlbum);
-      $scope.newAlbum = '';
       $scope.enteringAlbum = false;
+      $scope.albums = AlbumService.get();
+      $scope.selectedIndex = albums.length;
+      selectAlbum(albums[albums.length], albums.length);
     }
     function deleteAlbum(index) {
       AlbumService.delete(index);
+      $scope.albumSelected = false;
+      $scope.enteringAlbum = false;
     }
     function editAlbum(album) {
       album.isBeingEdited = true;
@@ -47,13 +52,6 @@
     function saveAlbum(index, editedAlbum) {
       AlbumService.update(index, editedAlbum);
       editedAlbum.isBeingEdited = false;
-    }
-
-    function setAll() {
-      var i, n = $scope.albums.length;
-      for (i = 0; i < n; ++i) {
-          $scope.albums[i].isSelected = false;
-      }
     }
   }
 }());

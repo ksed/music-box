@@ -45,57 +45,54 @@
               </ul>
             </li>
             <li class="dropdown col-md-offset-1">
-              <a ng-click='newAlbum()' href="#new-album">Add New Album
+              <a ng-click='newAlbum()' href="#">Add New Album</a>
             </li>
           </ul>
         </div>
         <div class="row">
-          <div class="col-md-6" ng-show="selectedAlbum">
+          <div id="view-album" class="col-md-12" ng-show="albumSelected">
             <h5>View, edit, or delete this album:</h5>
-            <div>
+            <div class="row">
               <span class="col-md-2">Title:</span>
-              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.title'>
-              <span ng-hide='selectedAlbum.isBeingEdited' ng-click='editAlbum(selectedAlbum)'>{{ selectedAlbum.title }}</span>
-              <button ng-click='saveAlbum(selectedAlbumIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
-              <button ng-click='deleteAlbum(selectedAlbumIndex)'>&times;</button>
+              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.title' class="col-md-3">
+              <span ng-hide='selectedAlbum.isBeingEdited' class="col-md-3">{{ selectedAlbum.title }}</span>
             </div>
-            <div>
+            <div class="row">
               <span class="col-md-2">Artist:</span>
-              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.artist'>
-              <span ng-hide='selectedAlbum.isBeingEdited' ng-click='editAlbum(selectedAlbum)'>{{ selectedAlbum.artist }}</span>
-              <button ng-click='saveAlbum(selectedAlbumIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
+              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.artist' class="col-md-3">
+              <span ng-hide='selectedAlbum.isBeingEdited' class="col-md-3">{{ selectedAlbum.artist }}</span>
             </div>
-            <div>
+            <div class="row">
               <span class="col-md-2">Released:</span>
-              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.releaseDate'>
-              <span ng-hide='selectedAlbum.isBeingEdited' ng-click='editAlbum(selectedAlbum)'>{{ selectedAlbum.releaseDate | date:"longDate" }}</span>
-              <button ng-click='saveAlbum(selectedAlbumIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
+              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.releaseDate' class="col-md-3">
+              <span ng-hide='selectedAlbum.isBeingEdited' class="col-md-3">{{ selectedAlbum.releaseDate | date:"longDate" }}</span>
             </div>
-            <div>
+            <div class="row">
               <span class="col-md-2">Liked:</span>
-              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.isGood'>
-              <span ng-hide='selectedAlbum.isBeingEdited' ng-click='editAlbum(selectedAlbum)'>{{ selectedAlbum.isGood }}</span>
-              <button ng-click='saveTodo(selectedAlbumIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
+              <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.isGood' class="col-md-3">
+              <span ng-hide='selectedAlbum.isBeingEdited' class="col-md-3">{{ selectedAlbum.isGood }}</span>
+            </div>
+            <div class="row">
+              <span class="col-md-3">
+                <button ng-click='editAlbum(selectedAlbum)' ng-hide='selectedAlbum.isBeingEdited'>Edit</button>
+                <button ng-click='saveAlbum(selectedAlbumIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
+                <button ng-click='deleteAlbum(selectedAlbumIndex)' ng-hide='selectedAlbum.isBeingEdited'>Delete</button>
+              </span>
             </div>
           </div>
           <div id="new-album" class="col-md-12" ng-show="enteringAlbum">
             <h5>Please enter your new album information below:</h5>
-            <div class="row">
-              <span class="col-md-2">Title:</span>
-              <input type="text" ng-model='newAlbum.title' placeholder="e.g. Symphonie Fantastique" class="col-md-3">
-            </div>
-            <div class="row">
-              <span class="col-md-2">Artist:</span>
-              <input type="text" ng-model='newAlbum.artist' placeholder="e.g. Hector Berlioz" class="col-md-3">
-            </div>
-            <div class="row">
-              <span class="col-md-2">Release Date:</span>
-              <input type="text" ng-model='newAlbum.releaseDate' placeholder="e.g. December 11, 1803" class="col-md-3">
-            </div>
-            <div class="row">
-              <span class="col-md-2">Liked?</span>
-              <input type="text" ng-model='newAlbum.isGood' placeholder="false" class="col-md-3">
-            </div>
+            <form action="#" id="form1">
+              <label>Title: </label>
+              <input type="text" ng-model='blankAlbum.title' required autofocus placeholder="e.g. Symphonie Fantastique"><br>
+              <label class="album-label">Artist: </label>
+              <input type="text" ng-model='blankAlbum.artist' required placeholder="e.g. Hector Berlioz"><br>
+              <label class="album-label">Release Date: </label>
+              <input type="text" ng-model='blankAlbum.releaseDate' required placeholder="e.g. December 11, 1803"><br>
+              <label class="album-label">Is a favorite? </label>
+              <input type="text" ng-model='blankAlbum.isGood' required placeholder="false"><br>
+              <input type="submit" ng-click= 'createAlbum(blankAlbum)' value="Save New Album">
+            </form>
           </div>
         </div>
       </div>

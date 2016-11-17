@@ -9,3 +9,12 @@
   width: 30%;
   height: 30%;
 }
+
+label {
+  display: inline-block;
+  width: 10%;
+}
+input {
+  display: inline-block;
+  width: 20%;
+}
