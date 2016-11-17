@@ -44,10 +44,14 @@
                 </li>
               </ul>
             </li>
+            <li class="dropdown col-md-offset-1">
+              <a ng-click='newAlbum()' href="#new-album">Add New Album
+            </li>
           </ul>
         </div>
         <div class="row">
           <div class="col-md-6" ng-show="selectedAlbum">
+            <h5>View, edit, or delete this album:</h5>
             <div>
               <span class="col-md-2">Title:</span>
               <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.title'>
@@ -72,6 +76,25 @@
               <input type="text" ng-show='selectedAlbum.isBeingEdited' ng-model='selectedAlbum.isGood'>
               <span ng-hide='selectedAlbum.isBeingEdited' ng-click='editAlbum(selectedAlbum)'>{{ selectedAlbum.isGood }}</span>
               <button ng-click='saveTodo(selectedAlbumIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
+            </div>
+          </div>
+          <div id="new-album" class="col-md-12" ng-show="enteringAlbum">
+            <h5>Please enter your new album information below:</h5>
+            <div class="row">
+              <span class="col-md-2">Title:</span>
+              <input type="text" ng-model='newAlbum.title' placeholder="e.g. Symphonie Fantastique" class="col-md-3">
+            </div>
+            <div class="row">
+              <span class="col-md-2">Artist:</span>
+              <input type="text" ng-model='newAlbum.artist' placeholder="e.g. Hector Berlioz" class="col-md-3">
+            </div>
+            <div class="row">
+              <span class="col-md-2">Release Date:</span>
+              <input type="text" ng-model='newAlbum.releaseDate' placeholder="e.g. December 11, 1803" class="col-md-3">
+            </div>
+            <div class="row">
+              <span class="col-md-2">Liked?</span>
+              <input type="text" ng-model='newAlbum.isGood' placeholder="false" class="col-md-3">
             </div>
           </div>
         </div>
