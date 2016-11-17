@@ -38,13 +38,14 @@
       AlbumService.create(newAlbum);
       $scope.enteringAlbum = false;
       $scope.albums = AlbumService.get();
-      $scope.selectedIndex = albums.length;
-      selectAlbum(albums[albums.length], albums.length);
+      $scope.selectedIndex = $scope.albums.length-1;
+      selectAlbum($scope.albums[$scope.selectedIndex], $scope.selectedIndex);
     }
     function deleteAlbum(index) {
       AlbumService.delete(index);
       $scope.albumSelected = false;
       $scope.enteringAlbum = false;
+      $scope.albums = AlbumService.get();
     }
     function editAlbum(album) {
       album.isBeingEdited = true;
