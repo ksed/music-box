@@ -75,8 +75,8 @@
             <div class="row">
               <span class="col-md-3">
                 <button ng-click='editAlbum(selectedAlbum)' ng-hide='selectedAlbum.isBeingEdited'>Edit</button>
-                <button ng-click='saveAlbum(selectedAlbumIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
-                <button ng-click='deleteAlbum(selectedAlbumIndex)' ng-hide='selectedAlbum.isBeingEdited'>Delete</button>
+                <button ng-click='saveAlbum(selectedIndex, selectedAlbum)' ng-show='selectedAlbum.isBeingEdited'>Save</button>
+                <button ng-click='deleteAlbum(selectedIndex)' ng-hide='selectedAlbum.isBeingEdited'>Delete</button>
               </span>
             </div>
           </div>

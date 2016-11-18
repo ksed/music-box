@@ -36,10 +36,7 @@
     }
     function createAlbum(newAlbum) {
       AlbumService.create(newAlbum);
-      $scope.enteringAlbum = false;
-      $scope.albums = AlbumService.get();
-      $scope.selectedIndex = $scope.albums.length-1;
-      selectAlbum($scope.albums[$scope.selectedIndex], $scope.selectedIndex);
+      selectAlbum(newAlbum, $scope.albums.length);
     }
     function deleteAlbum(index) {
       AlbumService.delete(index);

@@ -31,6 +31,7 @@
       $http.post('/albums', newAlbum)
           .then(function(res) {
             albums.push(newAlbum);
+            init();
           })
           .catch(function(err) {
             console.log(err);
@@ -49,6 +50,7 @@
       $http.delete('/albums/'+albums[index]._id)
           .then(function(res) {
             albums.splice(index, 1);
+            init();
           })
           .catch(function(err) {
             console.log(err);
